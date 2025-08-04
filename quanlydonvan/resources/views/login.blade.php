@@ -19,20 +19,30 @@
     <div class="login-container">
         <div class="login-box">
             <div class="logo">
-                <img src="../images/newlogo2-removebg.png" alt="Miền Tây Express Logo">
+                <img src="{{ asset('images/newlogo2-removebg.png') }}" alt="Miền Tây Express Logo">
                 <h1>Đăng nhập tài khoản</h1>
             </div>
-            <form id="loginForm">
+            <form id="loginForm" method="POST" action="{{ route('login') }}">
+                @csrf
                 <div class="input-group">
                     <span class="input-icon"><i class="fa-regular fa-envelope"></i></span>
-                    <input type="email" id="email" placeholder=" " required>
+                    <input type="email" name="email" id="email" placeholder=" " value="{{ old('email') }}" required>
                     <label for="email">Địa chỉ Email</label>
+                    @error('email')
+                        <span style="color: red;">{{ $message }}</span>
+                    @enderror
+                    <span class="error-message" style="color: red; display: none; position: absolute;"></span>
                 </div>
                 <div class="input-group">
                     <span class="input-icon"><i class="fa-solid fa-lock"></i></span>
-                    <input type="password" id="password" placeholder=" " required>
+                    <input type="password" name="password" id="password" placeholder=" " required>
                     <label for="password">Mật khẩu</label>
                     <span class="eye-icon" id="togglePassword"><i class="fa-regular fa-eye"></i></span>
+                </div>
+                <div>
+                    <label for="remember">
+                        <input type="checkbox" id="remember" name="remember"> Ghi nhớ tôi
+                    </label>
                 </div>
                 <a href="#" class="forgot-password">Quên mật khẩu?</a>
                 <button type="submit" class="login-btn">
@@ -68,17 +78,64 @@
             button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Đang xử lý...';
             button.disabled = true;
 
-            setTimeout(() => {
-                localStorage.setItem('isLoggedIn', 'true');
+            const formData = new FormData(this);
 
-                const redirectUrl = localStorage.getItem('redirectAfterLogin');
-                if (redirectUrl) {
-                    localStorage.removeItem('redirectAfterLogin');
-                    window.location.href = redirectUrl;
-                } else {
-                    window.location.href = '/';
+            fetch('{{ route('login') }}', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'Accept': 'application/json'
                 }
-            }, 1500);
+            })
+            .then(response => response.json())
+            .then(data => {
+                button.innerHTML = '<span>Đăng nhập</span><i class="fas fa-arrow-right"></i>';
+                button.disabled = false;
+
+                if (data.success) {
+                    localStorage.setItem('isLoggedIn', 'true');
+                    window.location.href = data.redirect;
+                } else {
+                    // const errorContainer = document.querySelector('.input-group input[name="email"]').parentElement;
+                    // let errorElement = errorContainer.querySelector('span');
+                    // if (!errorElement) {
+                    //     errorElement = document.createElement('span');
+                    //     errorElement.style.color = 'red';
+                    //     errorContainer.appendChild(errorElement);
+                    // }
+                    // errorElement.textContent = data.errors.email[0];
+
+                    const emailInput = document.querySelector('input[name="email"]');
+                    const passwordInput = document.querySelector('input[name="password"]');
+                    const errorContainer = emailInput.parentElement;
+                    const errorElement = errorContainer.querySelector('.error-message');
+
+                    // Reset password field
+                    passwordInput.value = '';
+
+                    // Show error message
+                    errorElement.style.display = 'block';
+                    errorElement.textContent = 'Email hoặc mật khẩu sai';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                button.innerHTML = '<span>Đăng nhập</span><i class="fas fa-arrow-right"></i>';
+                button.disabled = false;
+
+                const emailInput = document.querySelector('input[name="email"]');
+                const passwordInput = document.querySelector('input[name="password"]');
+                const errorContainer = emailInput.parentElement;
+                const errorElement = errorContainer.querySelector('.error-message');
+
+                // Reset password field
+                passwordInput.value = '';
+
+                // Show error message
+                errorElement.style.display = 'block';
+                errorElement.textContent = 'Email hoặc mật khẩu sai';
+            });
         });
 
         const togglePassword = document.getElementById('togglePassword');
@@ -89,14 +146,8 @@
             togglePassword.addEventListener('click', function () {
                 const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
                 passwordInput.setAttribute('type', type);
-
-                if (type === 'password') {
-                    eyeIcon.classList.remove('fa-eye-slash');
-                    eyeIcon.classList.add('fa-eye');
-                } else {
-                    eyeIcon.classList.remove('fa-eye');
-                    eyeIcon.classList.add('fa-eye-slash');
-                }
+                eyeIcon.classList.toggle('fa-eye', type === 'password');
+                eyeIcon.classList.toggle('fa-eye-slash', type !== 'password');
             });
         }
     </script>

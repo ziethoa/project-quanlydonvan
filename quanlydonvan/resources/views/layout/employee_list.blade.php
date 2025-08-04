@@ -383,23 +383,23 @@
             const isOpen = body.classList.contains('sidebar-mobile-open') || !body.classList.contains('sidebar-collapsed');
             if (mobileSidebarToggleBtn) mobileSidebarToggleBtn.setAttribute('aria-expanded', String(isOpen));
         }
-        function toggleSubmenu(event) {
-            event.preventDefault();
-            if (body.classList.contains('sidebar-collapsed') && window.innerWidth > 768) return;
-            const parentLink = event.currentTarget;
-            const submenuWrapper = parentLink.nextElementSibling;
-            if (!submenuWrapper || !submenuWrapper.classList.contains('submenu')) return;
-            if (!parentLink.classList.contains('active')) {
-                document.querySelectorAll('.menu-items .submenu-parent.active').forEach(activeParent => {
-                    if (activeParent !== parentLink) {
-                        activeParent.classList.remove('active');
-                        activeParent.nextElementSibling?.classList.remove('active');
-                    }
-                });
-            }
-            submenuWrapper.classList.toggle('active');
-            parentLink.classList.toggle('active');
-        }
+        // function toggleSubmenu(event) {
+        //     event.preventDefault();
+        //     if (body.classList.contains('sidebar-collapsed') && window.innerWidth > 768) return;
+        //     const parentLink = event.currentTarget;
+        //     const submenuWrapper = parentLink.nextElementSibling;
+        //     if (!submenuWrapper || !submenuWrapper.classList.contains('submenu')) return;
+        //     if (!parentLink.classList.contains('active')) {
+        //         document.querySelectorAll('.menu-items .submenu-parent.active').forEach(activeParent => {
+        //             if (activeParent !== parentLink) {
+        //                 activeParent.classList.remove('active');
+        //                 activeParent.nextElementSibling?.classList.remove('active');
+        //             }
+        //         });
+        //     }
+        //     submenuWrapper.classList.toggle('active');
+        //     parentLink.classList.toggle('active');
+        // }
         function initializeActiveSubmenu() {
             const activeSubmenuLink = document.querySelector('.sidebar .submenu a.active');
             if (activeSubmenuLink) {
@@ -414,8 +414,8 @@
         initializeActiveSubmenu();
         if (mobileSidebarToggleBtn) mobileSidebarToggleBtn.addEventListener('click', toggleSidebarMobileOrDesktop);
         if (sidebarOverlay) sidebarOverlay.addEventListener('click', toggleSidebarMobile);
-        if (desktopSidebarToggleBtn) desktopSidebarToggleBtn.addEventListener('click', toggleSidebarDesktop);
-        document.querySelectorAll('.menu-items .submenu-parent').forEach(link => link.addEventListener('click', toggleSubmenu));
+        // if (desktopSidebarToggleBtn) desktopSidebarToggleBtn.addEventListener('click', toggleSidebarDesktop);
+        // document.querySelectorAll('.menu-items .submenu-parent').forEach(link => link.addEventListener('click', toggleSubmenu));
 
         // --- Notification & Announcement Modal ---
         const notificationButton = document.getElementById('notification-button');

@@ -96,8 +96,7 @@
                     mới</button></div>
         </div>
     </section>
-    <footer class="site-footer">Minh Khôi Logistics © <span id="current-year">2025</span>. All rights reserved.
-        Design by Nina Co.,Ltd</footer>
+
 </div>
 @endsection
 
@@ -213,7 +212,7 @@
 
     function toggleSidebarMobile() { body.classList.toggle('sidebar-mobile-open'); const isOpen = body.classList.contains('sidebar-mobile-open'); if (mobileSidebarToggleBtn) mobileSidebarToggleBtn.setAttribute('aria-expanded', String(isOpen)); manageBodyScroll(); }
     function toggleSidebarDesktop() { body.classList.toggle('sidebar-collapsed'); const isCollapsed = body.classList.contains('sidebar-collapsed'); if (desktopSidebarToggleBtn) { desktopSidebarToggleBtn.title = isCollapsed ? "Phóng Sidebar" : "Thu Sidebar"; desktopSidebarToggleBtn.querySelector('i').style.transform = isCollapsed ? 'rotate(180deg)' : ''; } if (isCollapsed) { document.querySelectorAll('.menu-items .submenu.active').forEach(submenu => { submenu.classList.remove('active'); submenu.previousElementSibling?.classList.remove('active'); }); } }
-    function toggleSubmenu(event) { event.preventDefault(); const parentLink = event.currentTarget; const submenuWrapper = parentLink.nextElementSibling; if (!submenuWrapper || !submenuWrapper.classList.contains('submenu')) return; if (!parentLink.classList.contains('active')) { document.querySelectorAll('.menu-items .submenu-parent.active').forEach(activeParent => { if (activeParent !== parentLink) { activeParent.classList.remove('active'); activeParent.nextElementSibling?.classList.remove('active'); } }); } submenuWrapper.classList.toggle('active'); parentLink.classList.toggle('active'); }
+    // function toggleSubmenu(event) { event.preventDefault(); const parentLink = event.currentTarget; const submenuWrapper = parentLink.nextElementSibling; if (!submenuWrapper || !submenuWrapper.classList.contains('submenu')) return; if (!parentLink.classList.contains('active')) { document.querySelectorAll('.menu-items .submenu-parent.active').forEach(activeParent => { if (activeParent !== parentLink) { activeParent.classList.remove('active'); activeParent.nextElementSibling?.classList.remove('active'); } }); } submenuWrapper.classList.toggle('active'); parentLink.classList.toggle('active'); }
     function initializeActiveSubmenu() { const activeLink = document.querySelector('.sidebar .menu-items > li > a.active'); const activeSubmenuLink = document.querySelector('.sidebar .submenu a.active'); if (activeSubmenuLink) { const submenuDiv = activeSubmenuLink.closest('.submenu'); const parentLink = submenuDiv?.previousElementSibling; if (submenuDiv && parentLink && parentLink.classList.contains('submenu-parent')) { if (!activeLink || activeLink !== parentLink) { submenuDiv.classList.add('active'); parentLink.classList.add('active'); } } } }
     function updateDateTime() { const now = new Date(); const optionsDate = { weekday: 'short', day: '2-digit', month: '2-digit', year: 'numeric' }; const optionsTime = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true }; try { let dayOfWeek; switch (now.getDay()) { case 0: dayOfWeek = "Sun"; break; case 1: dayOfWeek = "Mon"; break; case 2: dayOfWeek = "Tue"; break; case 3: dayOfWeek = "Wed"; break; case 4: dayOfWeek = "Thu"; break; case 5: dayOfWeek = "Fri"; break; case 6: dayOfWeek = "Sat"; break; default: dayOfWeek = ""; } const dateString = `${dayOfWeek} ${now.toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' })}`; if (currentDateSpan) currentDateSpan.textContent = dateString; if (currentTimeSpan) currentTimeSpan.textContent = now.toLocaleTimeString('en-US', optionsTime); } catch (e) { if (currentDateSpan) currentDateSpan.textContent = now.toLocaleDateString(); if (currentTimeSpan) currentTimeSpan.textContent = now.toLocaleTimeString(); } if (currentYearSpan) currentYearSpan.textContent = now.getFullYear(); }
     function toggleFullscreen() { if (!document.fullscreenElement) { document.documentElement.requestFullscreen().catch(err => console.error(`Fullscreen error: ${err.message}`)); } else if (document.exitFullscreen) { document.exitFullscreen(); } }
@@ -690,8 +689,8 @@
             mobileSidebarToggleBtn.setAttribute('aria-expanded', String(isOpen));
         });
         if (sidebarOverlay) sidebarOverlay.addEventListener('click', toggleSidebarMobile);
-        if (desktopSidebarToggleBtn) desktopSidebarToggleBtn.addEventListener('click', toggleSidebarDesktop);
-        document.querySelectorAll('.menu-items .submenu-parent').forEach(link => link.addEventListener('click', toggleSubmenu));
+        // if (desktopSidebarToggleBtn) desktopSidebarToggleBtn.addEventListener('click', toggleSidebarDesktop);
+        // document.querySelectorAll('.menu-items .submenu-parent').forEach(link => link.addEventListener('click', toggleSubmenu));
         if (fullscreenBtn) fullscreenBtn.addEventListener('click', toggleFullscreen);
         document.addEventListener('fullscreenchange', handleFullscreenChange);
 

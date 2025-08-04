@@ -189,7 +189,7 @@ textarea[readonly] {
     flex-direction: column;
     width: 100%;
     box-sizing: border-box;
-    min-height: 100vh;
+    /* min-height: 100vh; */
     position: relative;
     overflow: visible;
 }
@@ -886,7 +886,7 @@ footer.content-actions {
     box-shadow: var(--shadow-lg);
 }
 
-.site-footer {
+/* .site-footer {
     margin-top: 0;
     padding: var(--base-padding);
     text-align: center;
@@ -894,7 +894,7 @@ footer.content-actions {
     color: var(--text-secondary);
     border-top: 1px solid var(--border-light);
     flex-shrink: 0;
-}
+} */
 
 @media (max-width: 992px) {
     .main-content-grid {

@@ -17,7 +17,7 @@
   --text-secondary: #64748b !important;
   --text-on-primary: #ffffff;
   --bg-color: #f8fafc !important;
-  --accent: #FFD600;
+  --accent: #ebc60b;
   --card-bg: #fff !important;
   --border-color: #e2e8f0 !important;
   --sidebar-bg: #23272f;
@@ -2764,6 +2764,7 @@ button:disabled {
 .user-dropdown-item:hover {
   background: rgba(99, 102, 241, 0.05);
   color: var(--accent);
+  font-weight: 700;
   padding-left: 24px;
 }
 

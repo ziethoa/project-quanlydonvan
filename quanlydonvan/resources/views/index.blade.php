@@ -8,11 +8,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="{{ asset('css/home.css') }}">
     @stack('css')
+    <link rel="stylesheet" href="css/package_manager.css"> 
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
-    <link rel="icon" type="image/x-icon" href="../images/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="../images/favicon-rmbg.ico" />
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 </head>
@@ -25,7 +26,8 @@
         </div>
         <nav class="menu-items" aria-label="Main Navigation">
             <ul>
-                <li><a href="/" class="active"><i class="fa-solid fa-house icon"></i><span class="menu-text">TRANG
+                <li><a href="/dashboard"><i class="fa-solid fa-house icon"></i><span
+                            class="menu-text">TRANG
                             CHỦ</span></a></li>
                 <li><a href="/create_package"><i class="fa-solid fa-plus icon"></i><span class="menu-text">TẠO
                             ĐƠN HÀNG</span></a></li>
@@ -36,15 +38,16 @@
                         <ul>
                             <li><a href="/package_manager"><i class="fa-solid fa-box-archive icon"></i><span
                                         class="menu-text">Quản lý đơn hàng</span></a></li>
-                            <li><a href="/landing_status"><i
-                                        class="fa-solid fa-list-check icon"></i><span class="menu-text">Quản lý trạng
+                            <li><a href="/landing_status"><i class="fa-solid fa-list-check icon"></i><span
+                                        class="menu-text">Quản lý trạng
                                         thái</span></a></li>
                             <li><a href="/pickup_package"><i class="fa-solid fa-truck-fast icon"></i><span
                                         class="menu-text">Quản lý vận chuyển</span></a></li>
-                            <li><a href="#"><i class="fa-solid fa-building-user icon"></i><span class="menu-text">Quản
+                            <li><a href="#"><i class="fa-solid fa-building-user icon"></i><span
+                                        class="menu-text">Quản
                                         lý chi nhánh</span></a></li>
-                            <li><a href="/payment_management"><i
-                                        class="fa-solid fa-dollar-sign icon"></i><span class="menu-text">Quản lý thanh
+                            <li><a href="/payment_management"><i class="fa-solid fa-dollar-sign icon"></i><span
+                                        class="menu-text">Quản lý thanh
                                         toán</span></a></li>
                         </ul>
                     </div>
@@ -57,12 +60,13 @@
                     <a href="/customer_list"><i class="fa-solid fa-users icon"></i><span class="menu-text">QL KHÁCH
                             HÀNG</span></a>
                 </li>
-                <li><a href="/employee_list"><i class="fa-solid fa-user-tie icon"></i><span
-                            class="menu-text">QL NHÂN SỰ</span></a></li>
+                <li><a href="/employee_list"><i class="fa-solid fa-user-tie icon"></i><span class="menu-text">QL NHÂN
+                            SỰ</span></a></li>
                 <li><a href="#"><i class="fa-solid fa-circle-info icon"></i><span class="menu-text">THÔNG TIN CÔNG
                             TY</span></a></li>
                 <li>
-                    <a href="#" class="submenu-parent"><i class="fa-solid fa-scroll icon"></i><span class="menu-text">QL
+                    <a href="#" class="submenu-parent"><i class="fa-solid fa-scroll icon"></i><span
+                            class="menu-text">QL
                             CHÍNH SÁCH</span><i class="fa-solid fa-chevron-down submenu-arrow"></i></a>
                     <div class="submenu">
                         <ul>
@@ -71,10 +75,12 @@
                         </ul>
                     </div>
                 </li>
-                <li><a href="#"><i class="fa-solid fa-circle-question icon"></i><span class="menu-text">HƯỚNG DẪN SỬ
+                <li><a href="#"><i class="fa-solid fa-circle-question icon"></i><span class="menu-text">HƯỚNG DẪN
+                            SỬ
                             DỤNG</span></a></li>
                 <li>
-                    <a href="#" class="submenu-parent"><i class="fa-solid fa-gear icon"></i><span class="menu-text">CÀI
+                    <a href="#" class="submenu-parent"><i class="fa-solid fa-gear icon"></i><span
+                            class="menu-text">CÀI
                             ĐẶT CHUNG</span><i class="fa-solid fa-chevron-down submenu-arrow"></i></a>
                     <div class="submenu">
                         <ul>
@@ -88,7 +94,7 @@
     </aside>
     <div class="sidebar-overlay" id="sidebar-overlay"></div>
 
-    <main class="main-content" >
+    <main class="main-content">
         <header class="header">
             <button class="mobile-sidebar-toggle" id="mobile-sidebar-toggle" aria-label="Toggle Navigation Menu"
                 aria-controls="sidebar" aria-expanded="false" style="display: inline-flex;"><i
@@ -100,8 +106,8 @@
                     <div class="mobile-search-overlay" id="mobile-search-overlay" style="display:none;">
                         <input type="text" id="mobile-search-input" class="mobile-search-input"
                             placeholder="Tìm kiếm...">
-                        <button id="mobile-search-close" class="icon-button" type="button" aria-label="Đóng tìm kiếm"><i
-                                class="fa-solid fa-xmark"></i></button>
+                        <button id="mobile-search-close" class="icon-button" type="button"
+                            aria-label="Đóng tìm kiếm"><i class="fa-solid fa-xmark"></i></button>
                     </div>
                 </div>
             </div>
@@ -152,6 +158,32 @@
                             style="color: #fff; font-size: 1.25em;"></i>
                     </div>
                     <div class="user-dropdown" id="user-dropdown">
+                        {{-- sau khi truy cập login --}}
+                        @if (Auth::check())
+                            <div class="user-info">
+                                <div class="user-avatar"><i class="fa-regular fa-circle-user"></i></div>
+                                <div class="user-details">
+                                    <h4>{{ Auth::user()->name }}</h4>
+                                    <span class="user-role">{{ Auth::user()->role ?? 'Quản trị viên' }}</span>
+                                </div>
+                            </div>
+                            <hr>
+                            <a href="#" class="user-dropdown-item"><i class="fa-regular fa-user"></i> Thông tin
+                                cá nhân</a>
+                            <a href="#" class="user-dropdown-item"><i class="fa-solid fa-gear"></i> Cài đặt tài
+                                khoản</a>
+                            <a href="#" class="user-dropdown-item"><i class="fa-solid fa-bell"></i> Thông
+                                báo</a>
+                            <a href="#" class="user-dropdown-item"><i class="fa-solid fa-shield-halved"></i>
+                                Bảo mật</a>
+                            <hr>
+                            <a href="#" class="user-dropdown-item" id="logout-menu-item"><i
+                                    class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a>
+                        @else
+                            <a href="{{ route('login') }}" class="user-dropdown-item" id="login-menu-item">
+                                <i class="fa-solid fa-right-to-bracket"></i> Đăng nhập
+                            </a>
+                        @endif
                     </div>
                 </div>
         </header>
@@ -168,8 +200,8 @@
         <div class="announcement-overlay" id="announcement-overlay">
             <div class="announcement-box" id="announcement-box">
                 <div class="announcement-header">
-                    <h3 id="announcement-title"></h3><button class="announcement-close-btn" id="announcement-close-btn"
-                        title="Đóng thông báo">×</button>
+                    <h3 id="announcement-title"></h3><button class="announcement-close-btn"
+                        id="announcement-close-btn" title="Đóng thông báo">×</button>
                 </div>
                 <div class="announcement-body" id="announcement-body"></div>
                 <div class="announcement-footer"><span id="announcement-timestamp"></span></div>
@@ -177,81 +209,106 @@
         </div>
 
     </main>
-@stack('script')
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const menuItems = document.querySelectorAll('.menu-items a');
-        const submenus = document.querySelectorAll('.submenu');
-        const submenuParents = document.querySelectorAll('.submenu-parent');
+    @stack('script')
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuItems = document.querySelectorAll('.menu-items a');
+            const submenus = document.querySelectorAll('.submenu');
+            const submenuParents = document.querySelectorAll('.submenu-parent');
 
-        // Xóa tất cả class active
-        function clearActiveClasses() {
-            menuItems.forEach(item => item.classList.remove('active'));
-            submenus.forEach(submenu => submenu.classList.remove('active'));
-        }
+            // Xóa tất cả class active
+            function clearActiveClasses() {
+                submenuParents.forEach(parent => parent.classList.remove('active'));
+                submenus.forEach(submenu => submenu.classList.remove('active'));    
+            }
 
-        // Set active dựa trên URL
-        function setActiveMenu() {
-            const currentPath = window.location.pathname;
-            clearActiveClasses();
-
-            menuItems.forEach(item => {
-                const href = item.getAttribute('href');
-                if (href === currentPath || (href === '/' && currentPath === '')) {
-                    item.classList.add('active');
-                    const submenu = item.closest('.submenu');
-                    if (submenu) {
-                        submenu.classList.add('active');
-                        const parent = submenu.previousElementSibling;
-                        if (parent?.classList.contains('submenu-parent')) {
-                            parent.classList.add('active');
+            // Set active dựa trên URL
+            function setActiveMenu() {
+                const currentPath = window.location.pathname;
+                // Chỉ xóa active nếu không phải từ toggle thủ công
+                menuItems.forEach(item => {
+                    const href = item.getAttribute('href');
+                    if (href === currentPath || (href === '/' && currentPath === '')) {
+                        item.classList.add('active');
+                        const submenu = item.closest('.submenu');
+                        if (submenu) {
+                            submenu.classList.add('active');
+                            const parent = submenu.previousElementSibling;
+                            if (parent?.classList.contains('submenu-parent')) {
+                                parent.classList.add('active');
+                            }
                         }
                     }
-                }
-            });
-        }
+                });
+            }
 
-        // Xử lý click cho menu items
-        menuItems.forEach(item => {
-            item.addEventListener('click', () => {
-                clearActiveClasses();
-                item.classList.add('active');
-                const submenu = item.closest('.submenu');
-                if (submenu) {
-                    submenu.classList.add('active');
-                    const parent = submenu.previousElementSibling;
-                    if (parent?.classList.contains('submenu-parent')) {
-                        parent.classList.add('active');
+            // Xử lý click cho submenu parents
+            submenuParents.forEach(parent => {
+                parent.addEventListener('click', (e) => {
+                    e.preventDefault(); // Ngăn chặn điều hướng
+                    const submenu = parent.nextElementSibling;
+                    if (submenu?.classList.contains('submenu')) {
+                        const isActive = submenu.classList.contains('active'); // Kiểm tra trước
+                        console.log('isActive:', isActive, 'submenu:', submenu);
+                        if (!isActive) {
+                            clearActiveClasses();
+                            parent.classList.add('active');
+                            submenu.classList.add('active');
+                            console.log('aaaaa');
+                        } else {
+                            clearActiveClasses();
+                            console.log('bbbbbb');
+                        }
                     }
-                }
+                });
             });
-        });
 
-        // Xử lý click cho submenu parents
-        submenuParents.forEach(parent => {
-            parent.addEventListener('click', () => {
-                const submenu = parent.nextElementSibling;
-                if (submenu?.classList.contains('submenu')) {
-                    const isActive = submenu.classList.contains('active');
-                    clearActiveClasses();
-                    if (!isActive) {
-                        parent.classList.add('active');
-                        submenu.classList.add('active');
+            // Xử lý thay đổi URL (browser history)
+            window.addEventListener('popstate', setActiveMenu);
+
+            setActiveMenu();
+            // Xử lý đăng xuất qua AJAX
+            const logoutItem = document.getElementById('logout-menu-item');
+            if (logoutItem) {
+                logoutItem.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    fetch('{{ route('logout') }}', {
+                            method: 'POST',
+                            headers: {
+                                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                                'X-Requested-With': 'XMLHttpRequest',
+                                'Accept': 'application/json'
+                            }
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                window.location.href = data.redirect;
+                            }
+                        })
+                        .catch(error => console.error('Logout error:', error));
+                });
+            }
+
+            // Xử lý toggle dropdown người dùng
+            const userToggle = document.getElementById('user-dropdown-toggle');
+            const userDropdown = document.getElementById('user-dropdown');
+            if (userToggle && userDropdown) {
+                userToggle.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    userDropdown.classList.toggle('show');
+                });
+                document.addEventListener('click', (e) => {
+                    if (!userDropdown.contains(e.target) && e.target !== userToggle) {
+                        userDropdown.classList.remove('show');
                     }
-                }
-            });
+                });
+            }
         });
+    </script>
 
-        // Set active khi load trang
-        setActiveMenu();
-
-        // Xử lý thay đổi URL (browser history)
-        window.addEventListener('popstate', setActiveMenu);
-    });
-</script>
-
-{{-- login --}}
-<script>
+    {{-- login --}}
+    {{-- <script>
     document.addEventListener('DOMContentLoaded', function () {
         // Hàm render dropdown người dùng
         function renderUserDropdown() {
@@ -334,7 +391,7 @@
             });
         }
     });
-</script>
+</script> --}}
 </body>
 
 </html>

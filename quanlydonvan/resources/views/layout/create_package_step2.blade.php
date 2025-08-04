@@ -441,9 +441,6 @@
         </form>
     </section>
 
-    <footer class="site-footer">
-        Minh Khôi Logistics © <span id="current-year"></span>. All rights reserved. Design by Nina Co.,Ltd
-    </footer>
 
 </div>
 @endsection
@@ -492,28 +489,28 @@
         manageBodyScroll();
     }
 
-    function toggleSubmenu(event) {
-        event.preventDefault();
-        if (body.classList.contains('sidebar-collapsed') && window.innerWidth > 768) return;
-        const parentLink = event.currentTarget;
-        const submenuWrapper = parentLink.nextElementSibling;
-        const arrow = parentLink.querySelector('.submenu-arrow');
+    // function toggleSubmenu(event) {
+    //     event.preventDefault();
+    //     if (body.classList.contains('sidebar-collapsed') && window.innerWidth > 768) return;
+    //     const parentLink = event.currentTarget;
+    //     const submenuWrapper = parentLink.nextElementSibling;
+    //     const arrow = parentLink.querySelector('.submenu-arrow');
 
-        if (!submenuWrapper || !submenuWrapper.classList.contains('submenu')) return;
-        const isActive = submenuWrapper.classList.contains('active');
+    //     if (!submenuWrapper || !submenuWrapper.classList.contains('submenu')) return;
+    //     const isActive = submenuWrapper.classList.contains('active');
 
-        document.querySelectorAll('.menu-items .submenu-parent.active').forEach(activeParent => {
-            if (activeParent !== parentLink) {
-                activeParent.classList.remove('active');
-                activeParent.nextElementSibling?.classList.remove('active');
-                activeParent.querySelector('.submenu-arrow')?.style.setProperty('transform', 'rotate(0deg)');
-            }
-        });
+    //     document.querySelectorAll('.menu-items .submenu-parent.active').forEach(activeParent => {
+    //         if (activeParent !== parentLink) {
+    //             activeParent.classList.remove('active');
+    //             activeParent.nextElementSibling?.classList.remove('active');
+    //             activeParent.querySelector('.submenu-arrow')?.style.setProperty('transform', 'rotate(0deg)');
+    //         }
+    //     });
 
-        submenuWrapper.classList.toggle('active', !isActive);
-        parentLink.classList.toggle('active', !isActive);
-        if (arrow) arrow.style.setProperty('transform', !isActive ? 'rotate(180deg)' : 'rotate(0deg)');
-    }
+    //     submenuWrapper.classList.toggle('active', !isActive);
+    //     parentLink.classList.toggle('active', !isActive);
+    //     if (arrow) arrow.style.setProperty('transform', !isActive ? 'rotate(180deg)' : 'rotate(0deg)');
+    // }
 
     function initializeActiveSubmenu() {
         document.querySelectorAll('.menu-items .submenu-parent').forEach(parentLink => {
@@ -564,8 +561,8 @@
         updateDateTime();
         setInterval(updateDateTime, 1000);
         if (mobileSidebarToggleBtn) mobileSidebarToggleBtn.addEventListener('click', toggleSidebarMobileOrDesktop);
-        if (sidebarOverlay) sidebarOverlay.addEventListener('click', toggleSidebarMobileOrDesktop);
-        document.querySelectorAll('.menu-items .submenu-parent').forEach(link => link.addEventListener('click', toggleSubmenu));
+        // if (sidebarOverlay) sidebarOverlay.addEventListener('click', toggleSidebarMobileOrDesktop);
+        // document.querySelectorAll('.menu-items .submenu-parent').forEach(link => link.addEventListener('click', toggleSubmenu));
         if (fullscreenBtn) fullscreenBtn.addEventListener('click', toggleFullscreen);
         document.addEventListener('fullscreenchange', handleFullscreenChange);
 

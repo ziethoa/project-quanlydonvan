@@ -631,7 +631,7 @@ footer.form-actions {
 }
 
 
-.site-footer {
+/* .site-footer {
     flex-shrink: 0;
     margin-top: 0.3rem;
     padding: 0.8rem var(--base-padding);
@@ -642,7 +642,7 @@ footer.form-actions {
     background-color: var(--bg-color);
     position: relative;
     z-index: 1;
-}
+} */
 
 .modal-overlay {
     position: fixed;

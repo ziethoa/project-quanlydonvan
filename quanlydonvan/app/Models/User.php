@@ -21,6 +21,10 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
+        'employeeCode',
+        'phone',
+        'position'
     ];
 
     /**
@@ -42,4 +46,18 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function senders()
+    {
+        return $this->hasMany(Sender::class, 'user_id');
+    }
+
+    public function receivers()
+    {
+        return $this->hasMany(Receiver::class, 'user_id');
+    }
+
+    public function bills(){
+        return $this->hasMany(Bill::class, 'user_id');
+    }
 }

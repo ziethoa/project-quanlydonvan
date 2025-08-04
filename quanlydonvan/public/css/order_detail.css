@@ -350,19 +350,19 @@ body {
     cursor: pointer;
 }
 
-.site-footer {
+/* .site-footer {
     text-align: center;
     padding: var(--base-padding);
     font-size: var(--base-font-size);
     color: var(--text-secondary);
     background-color: var(--bg-color);
-}
+} */
 
 .order-detail-content {
     font-family: var(--font-family);
     color: var(--text-primary);
     background-color: var(--bg-color);
-    min-height: calc(100vh - 60px);
+    /* min-height: calc(100vh - 60px); */
     padding: var(--base-padding);
     --base-font-size: 0.65rem;
     --form-gap: 0.1rem;
